@@ -3,10 +3,8 @@ import string
 import sys
 
 
-def revall(s: str) -> str:
-    middle = list(s)
-    random.shuffle(middle)
-    return ''.join(middle)
+def revtext(text: str) -> str:
+    return ' '.join(revword(w) for w in text.split())
 
 
 def revword(w: str) -> str:
@@ -21,13 +19,15 @@ def revword(w: str) -> str:
     if len(w) - skip_start - skip_end < 2:
         return w
 
-    return w[:skip_start] + revall(w[skip_start:-skip_end]) + w[-skip_end:]
+    return w[:skip_start] + revchars(w[skip_start:-skip_end]) + w[-skip_end:]
 
 
-def revline(line: str) -> str:
-    return ' '.join(revword(w) for w in line.split())
+def revchars(s: str) -> str:
+    chars = list(s)
+    random.shuffle(chars)
+    return ''.join(chars)
 
 
 if __name__ == '__main__':
     for line in sys.stdin:
-        print(revline(line))
+        print(revtext(line))
