@@ -10,6 +10,10 @@ def revall(s: str) -> str:
 
 
 def revword(w: str) -> str:
+    bits = w.split('-')
+    if len(bits) > 1:
+        return '-'.join(revword(bit) for bit in bits)
+
     skip_start = skip_end = 1
     if w.endswith(tuple(string.punctuation)):
         skip_end += 1
