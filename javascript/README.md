@@ -21,5 +21,5 @@ console.log(mixed)
 Примеры:
 ```bash
 $ node shuffler.js < ../data/sample.txt # вывод в STDOUT
-$ node shuffler.sh < ../data/sample.txt > text.out # вывод в файл text.out
+$ node shuffler.js < ../data/sample.txt > text.out # вывод в файл text.out
 ```
