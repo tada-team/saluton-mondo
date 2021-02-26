@@ -8,3 +8,4 @@
 
 ## По порядку
  * [Python](https://github.com/tada-team/saluton-mondo/tree/main/python3)
+ * [JavaScript](./javascript)
