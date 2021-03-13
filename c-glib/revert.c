@@ -39,9 +39,9 @@ size_t find_hyphen(shuffle_info *shuffle)
 
 void scan_stdin()
 {
-  char *word_ptr = NULL;
+  char word_ptr[1000] = {0};
 
-  while (fscanf(stdin, "%ms", &word_ptr) != EOF)
+  while (fscanf(stdin, "%1000s", word_ptr) != EOF)
   {
     /* Use fix width ucs4 encoding */
     glong str_items = 0;
@@ -52,6 +52,7 @@ void scan_stdin()
     {
       --str_items; /* Do not shuffle punctuation at the end of string */
     }
+    --str_items; /* Do not sort last character */
 
     shuffle_info word_shuffle = {
         .unistr = ucs8_str,
@@ -59,32 +60,33 @@ void scan_stdin()
         .hyphen = 0,
         .end = str_items};
 
-    word_shuffle.hyphen = find_hyphen(&word_shuffle);
-
-    if (word_shuffle.hyphen == 0)
+    if (str_items > 1)
     {
-      shuffle_array(&word_shuffle);
-    }
-    else
-    {
-      shuffle_info first_part_shuffle = word_shuffle;
-      first_part_shuffle.end = word_shuffle.hyphen;
-      shuffle_array(&first_part_shuffle);
+      word_shuffle.hyphen = find_hyphen(&word_shuffle);
 
-      shuffle_info second_part_shuffle = word_shuffle;
-      second_part_shuffle.start = word_shuffle.hyphen + 2;
-      shuffle_array(&second_part_shuffle);
+      if (word_shuffle.hyphen == 0)
+      {
+        shuffle_array(&word_shuffle);
+      }
+      else
+      {
+        shuffle_info first_part_shuffle = word_shuffle;
+        first_part_shuffle.end = word_shuffle.hyphen;
+        shuffle_array(&first_part_shuffle);
+
+        shuffle_info second_part_shuffle = word_shuffle;
+        second_part_shuffle.start = word_shuffle.hyphen + 2;
+        shuffle_array(&second_part_shuffle);
+      }
     }
 
     printf("%s ", g_ucs4_to_utf8(ucs8_str, -1, NULL, NULL, NULL));
-    free(word_ptr);
     g_free(ucs8_str);
-    word_ptr = NULL;
   };
   printf("\n");
 }
 
-int main(int argc, char **argv)
+int main()
 {
   /* Set time random seed */
   srand(time(NULL));
