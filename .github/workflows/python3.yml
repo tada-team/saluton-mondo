@@ -1,0 +1,20 @@
+name: python3
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: test
+        run: |
+          cd python3
+          PYTHONPATH=.. python3 test.py
