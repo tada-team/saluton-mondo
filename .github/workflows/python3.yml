@@ -17,3 +17,7 @@ jobs:
         run: |
           cd python3
           PYTHONPATH=.. python3 test.py
+      - name: Try sample
+        run: |
+          cd python3
+          cat ../data/sample.txt | python3 revert.py
