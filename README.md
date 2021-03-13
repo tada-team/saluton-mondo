@@ -7,5 +7,8 @@
 и выдавать на stdout.
 
 ## По порядку
- * [Python](https://github.com/tada-team/saluton-mondo/tree/main/python3)
- * [JavaScript](./javascript)
+
+| Пример        | Тесты         |
+| ------------- |:-------------:|
+| [Python 3](./python3)   | (https://github.com/tada-team/saluton-mondo/tree/main/python3) ![build](https://github.com/tada-team/saluton-mondo/actions/workflows/python3.yml/badge.svg) |
+| [JavaScript](./javascript) | -      |
