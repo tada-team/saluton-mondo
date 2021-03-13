@@ -8,7 +8,7 @@ Requirements:
 
 Build command:
 
-> gcc -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -lglib-2.0 -g3 -Wextra -Wall ./revert.c -o revert.exe
+> gcc $(pkg-config --cflags --libs glib-2.0) -g3 -Wextra -Wall ./revert.c -o revert.exe
 
 Run command:
 
