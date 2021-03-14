@@ -1,0 +1,31 @@
+---
+
+name: c-glib
+desciption: Run C-glib tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install packages
+        run: |
+          sudo apt install libglib2.0-0 libglib2.0-dev \
+            gcc-10 libc6-dev pkg-config
+      - name: Run tests
+        run: |
+          cd c-glib
+          make test
+      - name: Try sample
+        run: |
+          cd c-glib
+          make revert.exe
+          cat ../data/sample.txt | revert.exe
