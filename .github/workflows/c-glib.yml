@@ -1,7 +1,7 @@
 ---
 
 name: c-glib
-desciption: Run C-glib tests
+description: Run C-glib tests
 
 on:
   push:
