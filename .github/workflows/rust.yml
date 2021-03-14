@@ -18,10 +18,14 @@ jobs:
         uses: ATiltedTree/setup-rust@v1.0.4
         with:
           rust-version: stable
-      - name: Run tests
+      - name: Run checks
         run: |
           cd rust
           cargo check
+      - name: Run tests
+        run: |
+          cd rust
+          cargo test
       - name: Try sample
         run: |
           cd rust
