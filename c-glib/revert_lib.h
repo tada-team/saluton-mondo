@@ -4,7 +4,7 @@ typedef struct
 {
     gunichar *unistr;
     size_t start;
-    size_t hyphen;
+    size_t separator;
     size_t end;
 } shuffle_info;
 

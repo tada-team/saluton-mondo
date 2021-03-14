@@ -22,12 +22,12 @@ void shuffle_array(shuffle_info *shuffle)
     }
 }
 
-size_t find_hyphen(shuffle_info *shuffle)
+size_t find_separator(shuffle_info *shuffle)
 {
     gunichar *hyphen = g_utf8_to_ucs4("-", -1, NULL, NULL, NULL);
     for (size_t i = shuffle->start; i < shuffle->end; ++i)
     {
-        if (shuffle->unistr[i] == hyphen[0])
+        if (shuffle->unistr[i] == hyphen[0] || g_unichar_isspace(shuffle->unistr[i]))
         {
             return i;
         }
@@ -52,25 +52,25 @@ char *shuffle_word(char *word)
     shuffle_info word_shuffle = {
         .unistr = ucs8_str,
         .start = 1,
-        .hyphen = 0,
+        .separator = 0,
         .end = str_items};
 
     if (str_items > 1)
     {
-        word_shuffle.hyphen = find_hyphen(&word_shuffle);
+        word_shuffle.separator = find_separator(&word_shuffle);
 
-        if (word_shuffle.hyphen == 0)
+        if (word_shuffle.separator == 0)
         {
             shuffle_array(&word_shuffle);
         }
         else
         {
             shuffle_info first_part_shuffle = word_shuffle;
-            first_part_shuffle.end = word_shuffle.hyphen - 1;
+            first_part_shuffle.end = word_shuffle.separator - 1;
             shuffle_array(&first_part_shuffle);
 
             shuffle_info second_part_shuffle = word_shuffle;
-            second_part_shuffle.start = word_shuffle.hyphen + 2;
+            second_part_shuffle.start = word_shuffle.separator + 2;
             shuffle_array(&second_part_shuffle);
         }
     }
