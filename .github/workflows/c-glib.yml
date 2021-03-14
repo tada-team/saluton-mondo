@@ -5,7 +5,8 @@ desciption: Run C-glib tests
 
 on:
   push:
-    branches: [main]
+    paths:
+    - 'c-glib/*.c'
   pull_request:
     branches: [main]
 
