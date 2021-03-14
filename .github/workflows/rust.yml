@@ -1,0 +1,26 @@
+---
+
+name: rust tests
+
+on:
+  push:
+  pull_request:
+    branches: [main]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Rust
+        uses: ATiltedTree/setup-rust@v1.0.4
+      - name: Run tests
+        run: |
+          cd rust
+          cargo check
+      - name: Try sample
+        run: |
+          cd rust
+          cat ../data/sample.txt | cargo run
