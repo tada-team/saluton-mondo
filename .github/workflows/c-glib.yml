@@ -19,7 +19,7 @@ jobs:
       - name: Install packages
         run: |
           sudo apt install libglib2.0-0 libglib2.0-dev \
-            gcc-10 libc6-dev pkg-config libgtk2.0-dev
+            gcc-10 libc6-dev pkg-config
       - name: Test pkg-config
         run: |
           pkg-config --cflags --libs glib-2.0
@@ -31,4 +31,4 @@ jobs:
         run: |
           cd c-glib
           make revert.exe
-          cat ../data/sample.txt | revert.exe
+          cat ../data/sample.txt | ./revert.exe
